@@ -1,3 +1,4 @@
 {
-    "julia.executablePath": "/usr/local/julia/bin/julia"
+    "julia.executablePath": "/usr/local/julia/bin/julia",
+    "terminal.integrated.shellIntegration.decorationsEnabled": "never"
 }
