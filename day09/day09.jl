@@ -34,14 +34,14 @@ end
 function moverope!(tailpositions, rope, motion)
     foreach(1:motion.distance) do _
         rope[1] += motion.direction
-        map(i -> rope[i+1] = movetail(rope[i], rope[i+1]), 1:length(rope)-1)
+        foreach(i -> rope[i+1] = movetail(rope[i], rope[i+1]), 1:length(rope)-1)
         push!(tailpositions, rope[end])
     end
 end
 
 function moverope(rope, motionlist)
     tailpositions = [[0,0]]
-    map(m -> moverope!(tailpositions, rope, m), motionlist)
+    foreach(m -> moverope!(tailpositions, rope, m), motionlist)
     length(unique(tailpositions))
 end
 
