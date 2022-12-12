@@ -6,8 +6,9 @@
 	"dockerFile": "Dockerfile",
 	//"image": "ghcr.io/julia-vscode/julia-devcontainer",
 	"extensions": [
-			"julialang.language-julia",
-			"eamodio.gitlens"
+		"julialang.language-julia",
+		"eamodio.gitlens",
+		"GitHub.copilot"
 	],
 	"postCreateCommand": "julia /julia-devcontainer-scripts/postcreate.jl",
 	"remoteUser": "vscode"
