@@ -3,6 +3,8 @@
 [Advent of Code](https://adventofcode.com) is an Advent calendar of small programming puzzles for a variety of skill sets and skill levels that can be solved in any programming language you like. People use them as a speed contest, interview prep, company training, university coursework, practice problems, or to challenge each other.
 
 I'd like to get more familiar with the [Julia](https://julialang.org) language, so I am using it to solve the AoC puzzles.
+
+If you have questions about the AoC problems/solutions or about the Julia code in this repository, don't hesitate to ask. Suggestions about improvements are welcome too. [Let's get talking!](https://github.com/RobertCram/Advent-of-Code-2022/discussions/1)
 <br /> 
 <br /> 
 
