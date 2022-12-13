@@ -6,6 +6,10 @@ include("./../aoc.jl")
 
 using .AOC
 
+macro repeat(f, n)
+    return esc(:(foreach(_ -> $f, 1:$n)))
+end
+
 struct Monkey
     items::Vector{Int}
     operation::Function
@@ -57,14 +61,14 @@ function playmonkey!(game)
 end
 
 function playround!(game)
-    foreach(_ -> playmonkey!(game), game.monkeys)
+    @repeat playmonkey!(game) length(game.monkeys)
     game.currentround += 1
     game.currentplayer = 0
 end
 
 function solve(monkeys, rounds, decreaseworry)
     game = Game(monkeys, decreaseworry)
-    foreach(_ -> playround!(game), 1:rounds)
+    @repeat playround!(game) rounds
     sort!(game.inspections)
     game.inspections[end] * game.inspections[end - 1]
 end
