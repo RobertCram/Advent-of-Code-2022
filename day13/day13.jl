@@ -34,24 +34,44 @@ function compare(left::AbstractVector, right::AbstractVector)
     result
 end
 
-function compare(left::Int, right::AbstractVector)
-    compare([left], right)
+compare(left::Int, right::AbstractVector) = compare([left], right)
+
+compare(left::AbstractVector, right::Int) = compare(left, [right])
+
+
+# solve part 1
+
+function allpaircomparisons(input)
+    map(pp -> compare(pp.left, pp.right), input)
 end
 
-function compare(left::AbstractVector, right::Int)
-    compare(left, [right])
+function correctlyorderedpairindices(packetpairs)
+    findall(comparison -> comparison == 1, packetpairs)
 end
 
-function solvepart1(input)
-    sum(findall(r -> r == 1, map(pp -> compare(pp.left, pp.right), input)))
+function solvepart1(input)    
+    (sum ∘ correctlyorderedpairindices ∘ allpaircomparisons)(input)
+end
+
+# solve part 2
+
+function allpacketslist(input)
+    reduce((acc, pp) -> push!(acc, pp.left, pp.right), input, init = [])
+end
+
+function sort(signal)
+    sort!(signal, lt = (x, y) -> compare(x, y) == 1)
+end
+
+function decoderkey(signal, dividers)
+    findfirst(e -> e == dividers[1], signal) * findfirst(e -> e == dividers[2], signal) 
 end
 
 function solvepart2(input)
     dividers = [[[2]], [[6]]]
-    allpackets = reduce((acc, pp) -> push!(acc, pp.left, pp.right), input, init = [])
-    push!(allpackets, dividers...)
-    sort!(allpackets, lt = (x, y) -> compare(x, y) == 1)
-    findfirst(e -> e == dividers[1], allpackets) * findfirst(e -> e == dividers[2], allpackets)
+    signal = [allpacketslist(input); dividers]
+    sortedsignal = sort(signal)
+    decoderkey(sortedsignal, dividers)    
 end
 
 puzzles = [
